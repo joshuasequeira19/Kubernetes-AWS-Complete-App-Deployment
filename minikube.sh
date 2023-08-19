@@ -7,11 +7,26 @@ sudo apt-get install curl wget apt-transport-https virtualbox virtualbox-ext-pac
 
 echo "1st install docker"
 
-sudo apt update && apt -y install docker.io
+sudo apt update && sudo apt upgrade -y
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" -y
+
+sudo apt update -y
+
+apt-cache policy docker-ce -y
+
+sudo apt install docker-ce -y
+
+#sudo systemctl status docker
+
+sudo chmod 777 /var/run/docker.sock
 
 sudo systemctl start docker
 sudo systemctl enable docker
-sudo chmod 666 /var/run/docker.sock
 
 echo "Apply updates"
 sudo apt update -y 
